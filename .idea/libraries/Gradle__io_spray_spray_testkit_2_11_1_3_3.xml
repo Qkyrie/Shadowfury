@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.spray:spray-testkit_2.11:1.3.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spray/spray-testkit_2.11/1.3.3/9c49d2d2a28f05810cc0824bd96594f29bb0a1f4/spray-testkit_2.11-1.3.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.spray/spray-testkit_2.11/1.3.3/3c7355627dea70f7febc2fce5e02b26da8ec2545/spray-testkit_2.11-1.3.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.codingwell:scala-guice_2.10:4.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.codingwell/scala-guice_2.10/4.0.0/3a5de8ecc8d3a3deddec11f36447c83259c96c76/scala-guice_2.10-4.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.codingwell/scala-guice_2.10/4.0.0/3fc61c3d12e7edc4d7708c6c70b26816c4d3af00/scala-guice_2.10-4.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
