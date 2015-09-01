@@ -1,7 +1,14 @@
 package com.deswaef.shadowfury.infrastructure.mvc;
 
-/**
- * Created by QuintenDes on 01/09/15.
- */
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class IndexController {
+
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
 }
