@@ -2,8 +2,14 @@ wowhead:
   api:
     baseurl: ''
 
-#spring:
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/shadowfury
-#    username: shadowfury
-#    password: shadowfury
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/shadowfury
+    username: shadowfury
+    password: shadowfury
+  thymeleaf:
+    cache: false
+
+error:
+  whitelabel:
+    enabled: false
