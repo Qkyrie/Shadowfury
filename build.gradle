@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.2.3.RELEASE'
+        springBootVersion = '1.2.5.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -55,10 +55,14 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
     compile("org.springframework.boot:spring-boot-starter-batch")
+    compile("org.flywaydb:flyway-core")
     compile 'com.google.code.gson:gson:2.3.1'
     compile('com.squareup.retrofit:retrofit:1.9.0')
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("com.h2database:h2")
     testCompile 'org.assertj:assertj-core:3.1.0'
 }
 
