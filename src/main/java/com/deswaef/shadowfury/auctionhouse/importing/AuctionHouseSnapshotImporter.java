@@ -38,8 +38,9 @@ public class AuctionHouseSnapshotImporter {
         }
         return ServerMessage.Builder
                 .create()
-                .withId(System.currentTimeMillis())
-                .setMessage("imported snapshots for realm");
+                .withMessage("imported snapshots for realm")
+                .success()
+                .build();
     }
 
     private void importFile(Battlenet battlenet, AuctionResponse.AuctionResponseFile file, Realm realm) {

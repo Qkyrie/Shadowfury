@@ -61,16 +61,7 @@ public class AuctionHouseStatistic {
             type = FieldType.Date,
             store = true
     )
-    private Date exportTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public AuctionHouseStatistic setId(Long id) {
-        this.id = id;
-        return this;
-    }
+    private String exportTime;
 
     public Long getRealm() {
         return realm;
@@ -153,12 +144,21 @@ public class AuctionHouseStatistic {
         return this;
     }
 
-    public Date getExportTime() {
-        return exportTime;
+    public Long getId() {
+        return id;
     }
 
-    public AuctionHouseStatistic setExportTime(Date exportTime) {
+    public AuctionHouseStatistic setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public AuctionHouseStatistic setExportTime(String exportTime) {
         this.exportTime = exportTime;
         return this;
+    }
+
+    public String getExportTime() {
+        return exportTime;
     }
 }

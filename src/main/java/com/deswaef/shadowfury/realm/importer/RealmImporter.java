@@ -32,10 +32,13 @@ public class RealmImporter {
                     try {
                         if (realmService.count(locality) > 0) {
                             s.onNext(ServerMessage
-                                    .Builder
-                                    .create()
-                                    .withMessage("Realms for locality " + locality.getLocalityName() + " were already imported"));
-                        } else  {
+                                            .Builder
+                                            .create()
+                                            .withMessage("Realms for locality " + locality.getLocalityName() + " were already imported")
+                                            .failure()
+                                            .build()
+                            );
+                        } else {
                             if (battlenets.containsKey(locality.getLocalityName())) {
                                 List<Realm> newRealms = battlenets.get(locality.getLocalityName())
                                         .referencedata()
@@ -49,14 +52,19 @@ public class RealmImporter {
                                         ).collect(Collectors.toList());
                                 realmService.create(newRealms);
                                 s.onNext(ServerMessage
-                                        .Builder
-                                        .create()
-                                        .withMessage(String.format("done importing realms for locality: %s", locality.getLocalityName())));
+                                                .Builder
+                                                .create()
+                                                .withMessage(String.format("done importing realms for locality: %s", locality.getLocalityName()))
+                                                .success()
+                                                .build()
+                                );
                             } else {
                                 s.onNext(ServerMessage
                                                 .Builder
                                                 .create()
                                                 .withMessage(String.format("Couldn't import realms. There is no active client for locality: %s", locality.getLocalityName()))
+                                                .failure()
+                                                .build()
                                 );
                             }
                         }
@@ -64,8 +72,9 @@ public class RealmImporter {
                         s.onNext(ServerMessage
                                 .Builder
                                 .create()
-                                .withMessage(String.format("Couldn't import realms. Something unexpected happened! %s", ex.getMessage())
-                                ));
+                                .withMessage(String.format("Couldn't import realms. Something unexpected happened! %s", ex.getMessage()))
+                        .failure()
+                                .build());
                     }
                     s.onCompleted();
                 }

@@ -1,7 +1,7 @@
 package com.deswaef.shadowfury.auctionhouse.controller;
 
-import com.deswaef.shadowfury.auctionhouse.domain.AuctionHouseSnapshot;
 import com.deswaef.shadowfury.auctionhouse.service.AuctionHouseSnapshotService;
+import com.deswaef.shadowfury.auctionhouse.service.AuctionHouseStatisticService;
 import com.deswaef.shadowfury.realm.domain.Locality;
 import com.deswaef.shadowfury.realm.domain.Realm;
 import com.deswaef.shadowfury.realm.service.RealmService;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import rx.Observable;
 
-import java.awt.print.Pageable;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -25,6 +23,8 @@ public class AuctionHouseRestController {
 
     @Autowired
     private AuctionHouseSnapshotService auctionHouseSnapshotService;
+    @Autowired
+    private AuctionHouseStatisticService auctionHouseStatisticService;
 
     @Autowired
     private RealmService realmService;
@@ -34,7 +34,10 @@ public class AuctionHouseRestController {
         Optional<Realm> silvermoon = realmService.findBySlug(realm, locality);
         DeferredResult<ServerMessage> deferred = new DeferredResult<>();
         Observable<ServerMessage> serverMessageObservable = auctionHouseSnapshotService.doImport(silvermoon.get());
-        serverMessageObservable.subscribe(deferred::setResult, deferred::setErrorResult);
+        serverMessageObservable.subscribe((result) -> {
+            deferred.setResult(result);
+            auctionHouseStatisticService.statify(silvermoon.get());
+        }, deferred::setErrorResult);
         return deferred;
     }
 
@@ -47,7 +50,9 @@ public class AuctionHouseRestController {
     @RequestMapping(method = GET, value = "/{locality}/{realm}/statify")
     public DeferredResult<ServerMessage> statify(@PathVariable("realm") String realm, @PathVariable("locality") Locality locality) {
         Optional<Realm> actualRealm = realmService.findBySlug(realm, locality);
-        return null;
-        //TODO
+        DeferredResult<ServerMessage> deferredResult = new DeferredResult<>();
+        Observable<ServerMessage> statify = auctionHouseStatisticService.statify(actualRealm.get());
+        statify.subscribe(deferredResult::setResult, deferredResult::setErrorResult);
+        return deferredResult;
     }
 }

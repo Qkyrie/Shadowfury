@@ -6,6 +6,7 @@ public class ServerMessage {
     private Long id;
     private String message;
     private LocalDateTime timestamp;
+    private boolean success;
 
     public Long getId() {
         return id;
@@ -22,6 +23,15 @@ public class ServerMessage {
 
     public ServerMessage setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public ServerMessage setSuccess(boolean success) {
+        this.success = success;
         return this;
     }
 
@@ -45,12 +55,28 @@ public class ServerMessage {
             return new Builder();
         }
 
-        public ServerMessage withId(long id) {
-            return message.setId(id);
+        public Builder withId(long id) {
+            message.setId(id);
+            return this;
         }
 
-        public ServerMessage withMessage(String messageString) {
-            return message.setMessage(messageString);
+        public Builder success() {
+             message.setSuccess(true);
+            return this;
+        }
+
+        public Builder failure() {
+            message.setSuccess(false);
+            return this;
+        }
+
+        public Builder withMessage(String messageString) {
+            message.setMessage(messageString);
+            return this;
+        }
+
+        public ServerMessage build() {
+            return message;
         }
     }
 }

@@ -5,7 +5,10 @@ import com.deswaef.shadowfury.auctionhouse.domain.AuctionHouseStatistic;
 import org.elasticsearch.common.collect.ImmutableMap;
 import org.elasticsearch.common.collect.Maps;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
@@ -40,7 +43,7 @@ public class AuctionHouseSnapshotToStatisticConverter {
                         .setAverageBuyout(buyoutStatistics.getAverage())
                         .setMinimumBuyout(buyoutStatistics.getMin())
                         .setMaximumBuyout(buyoutStatistics.getMax())
-                        .setExportTime(new Date())
+                        .setExportTime(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))
                         .setRealm(realmId)
                         .setItem(itemId)
                         .setQuantity(quantity)
