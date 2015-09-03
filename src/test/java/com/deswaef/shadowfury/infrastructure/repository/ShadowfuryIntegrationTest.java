@@ -13,8 +13,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringApplicationConfiguration(classes = ShadowFury.class)
 @ActiveProfiles("integrationtest")
 @WebAppConfiguration
-@IntegrationTest("server.port:0")
-public class RepositoryIntegrationTest {
+@org.springframework.boot.test.IntegrationTest("server.port:0")
+public class ShadowfuryIntegrationTest {
 
     @Test
     public void setupCheck() throws Exception {

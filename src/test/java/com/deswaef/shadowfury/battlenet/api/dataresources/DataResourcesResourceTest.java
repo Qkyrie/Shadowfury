@@ -3,6 +3,7 @@ package com.deswaef.shadowfury.battlenet.api.dataresources;
 import com.deswaef.shadowfury.AbstractMockedTest;
 import com.deswaef.shadowfury.battlenet.api.dataresources.api.ClassesResponse;
 import com.deswaef.shadowfury.battlenet.api.dataresources.api.RacesResponse;
+import com.deswaef.shadowfury.battlenet.api.dataresources.api.RealmsResponse;
 import com.deswaef.shadowfury.battlenet.configuration.ApiKeyRequestInterceptor;
 import com.deswaef.shadowfury.battlenet.configuration.OkHttpClientProvider;
 import org.junit.Before;
@@ -51,5 +52,16 @@ public class DataResourcesResourceTest extends AbstractMockedTest {
                             assertThat(x.getName()).isNotNull();
                         }
                 );
+    }
+
+    @Test
+    public void gettingRealmstatusResultsInGoodData() throws Exception {
+        RealmsResponse realms = dataResourcesResource.realms();
+        assertThat(realms.getRealms().size()).isGreaterThan(0);
+        realms.getRealms()
+                .forEach(x -> {
+                    assertThat(x.getName()).isNotEmpty();
+                    assertThat(x.getSlug()).isNotEmpty();
+                });
     }
 }

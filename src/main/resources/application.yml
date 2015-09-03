@@ -13,3 +13,8 @@ spring:
 error:
   whitelabel:
     enabled: false
+
+battlenet:
+  urls:
+    eu: https://eu.api.battle.net
+    us: https://us.api.battle.net

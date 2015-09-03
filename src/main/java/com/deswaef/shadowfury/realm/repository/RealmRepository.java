@@ -8,5 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface RealmRepository extends JpaRepository<Realm, Long> {
-    Optional<Realm> findByNameAndLocality(@Param("name") String name, @Param("locality") Locality locality);
+    Optional<Realm> findBySlugAndLocality(@Param("slug") String slug, @Param("locality") Locality locality);
+
+    long countByLocality(@Param("locallity") Locality locality);
+
 }

@@ -2,6 +2,10 @@ package com.deswaef.shadowfury.auctionhouse.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.Date;
 
 
 @Document(indexName = "auctionhousesnapshot", type = "auctionhousesnapshot", shards = 1)
@@ -9,13 +13,46 @@ public class AuctionHouseSnapshot {
 
     @Id
     private Long auctionId;
+    @Field(
+            type = FieldType.Long,
+            store = true
+    )
     private Long itemId;
+    @Field(
+            type = FieldType.String,
+            store = true
+    )
     private String owner;
-    private Long bid;
-    private Long buyout;
-    private int quantity;
+    @Field(
+            type = FieldType.Double,
+            store = true
+    )
+    private Double bid;
+    @Field(
+            type = FieldType.Double,
+            store = true
+    )
+    private Double buyout;
+    @Field(
+            type = FieldType.Long,
+            store = true
+    )
+    private Long quantity;
+    @Field(
+            type = FieldType.String,
+            store = true
+    )
     private String timeLeft;
+    @Field(
+            type = FieldType.Long,
+            store = true
+    )
     private Long realm;
+    @Field(
+            type = FieldType.Date,
+            store = true
+    )
+    private Date exportTime;
 
     public Long getAuctionId() {
         return auctionId;
@@ -44,29 +81,29 @@ public class AuctionHouseSnapshot {
         return this;
     }
 
-    public Long getBid() {
+    public Double getBid() {
         return bid;
     }
 
-    public AuctionHouseSnapshot setBid(Long bid) {
+    public AuctionHouseSnapshot setBid(Double bid) {
         this.bid = bid;
         return this;
     }
 
-    public Long getBuyout() {
+    public Double getBuyout() {
         return buyout;
     }
 
-    public AuctionHouseSnapshot setBuyout(Long buyout) {
+    public AuctionHouseSnapshot setBuyout(Double buyout) {
         this.buyout = buyout;
         return this;
     }
 
-    public int getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public AuctionHouseSnapshot setQuantity(int quantity) {
+    public AuctionHouseSnapshot setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -86,6 +123,15 @@ public class AuctionHouseSnapshot {
 
     public AuctionHouseSnapshot setRealm(Long realm) {
         this.realm = realm;
+        return this;
+    }
+
+    public Date getExportTime() {
+        return exportTime;
+    }
+
+    public AuctionHouseSnapshot setExportTime(Date exportTime) {
+        this.exportTime = exportTime;
         return this;
     }
 }

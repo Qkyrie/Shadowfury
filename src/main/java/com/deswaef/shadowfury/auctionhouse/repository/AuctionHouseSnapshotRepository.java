@@ -7,5 +7,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AuctionHouseSnapshotRepository extends ElasticSearchRepository<AuctionHouseSnapshot, Long> {
-    List<AuctionHouseSnapshot> findByRealm(@Param("realm") Long realm);
+    List<AuctionHouseSnapshot> readAllByRealm(@Param("realm") Long realm);
+    List<AuctionHouseSnapshot> deleteByRealm(@Param("realm") Long realm);
+    long countByRealm(@Param("realm") Long realm);
 }

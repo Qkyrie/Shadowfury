@@ -47,6 +47,10 @@ public class AuctionHouseStatistic {
             store = true
     )
     private Long quantity;
+    @Field(
+            type = FieldType.Double,
+            store = true
+    )
     private Double averageBid;
     @Field(
             type = FieldType.Double,

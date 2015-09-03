@@ -4,27 +4,14 @@ import java.util.List;
 
 public class AuctionSnapshot  {
 
-    private AuctionInnerSnapshot auctions;
+    private List<AuctionItem> auctions;
 
-    public AuctionInnerSnapshot getAuctions() {
+    public List<AuctionItem> getAuctions() {
         return auctions;
     }
 
-    public void setAuctions(AuctionInnerSnapshot auctions) {
+    public AuctionSnapshot setAuctions(List<AuctionItem> auctions) {
         this.auctions = auctions;
-    }
-
-    public static final class AuctionInnerSnapshot {
-
-        private List<AuctionItem> auctions;
-
-        public List<AuctionItem> getAuctions() {
-            return auctions;
-        }
-
-        public void setAuctions(List<AuctionItem> auctions) {
-            this.auctions = auctions;
-        }
-
+        return this;
     }
 }

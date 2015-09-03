@@ -6,7 +6,7 @@ import retrofit.http.Path;
 
 public interface AuctionService {
 
-    @GET("/auction/data/{realm}")
+    @GET("/wow/auction/data/{realm}")
     AuctionResponse auctionInformation(@Path("realm") String realm);
 
 }

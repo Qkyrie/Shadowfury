@@ -1,31 +1,55 @@
 package com.deswaef.shadowfury.auctionhouse.service;
 
 import com.deswaef.shadowfury.auctionhouse.domain.AuctionHouseSnapshot;
+import com.deswaef.shadowfury.auctionhouse.importing.AuctionHouseSnapshotImporter;
 import com.deswaef.shadowfury.auctionhouse.repository.AuctionHouseSnapshotRepository;
 import com.deswaef.shadowfury.realm.domain.Realm;
+import com.deswaef.shadowfury.servermessage.domain.ServerMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import rx.Observable;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class AuctionHouseSnapshotServiceImpl implements AuctionHouseSnapshotService {
 
     @Autowired
     private AuctionHouseSnapshotRepository auctionHouseSnapshotRepository;
+    @Autowired
+    private AuctionHouseSnapshotImporter auctionHouseSnapshotImporter;
 
     @Override
     public List<AuctionHouseSnapshot> findByRealm(Realm realm) {
-        return auctionHouseSnapshotRepository.findByRealm(realm.getId());
+        return auctionHouseSnapshotRepository.readAllByRealm(realm.getId());
     }
 
     @Override
+    public Long countByRealm(Realm realm) {
+        return auctionHouseSnapshotRepository.countByRealm(realm.getId());
+    }
+
+    @Override
+    public Observable<ServerMessage> doImport(Realm realm) {
+        return Observable.<ServerMessage>create(s -> {
+            ServerMessage serverMessage = auctionHouseSnapshotImporter.importAuctionHouseSnapshots(realm);
+            s.onNext(serverMessage);
+            s.onCompleted();
+        });
+    }
+
+    @Override
+    @Transactional
     public void deleteByRealm(Realm realm) {
-        auctionHouseSnapshotRepository.delete(
-                findByRealm(realm)
-        );
+        auctionHouseSnapshotRepository.deleteByRealm(realm.getId());
+    }
+
+    @Override
+    @Transactional
+    public void create(Iterable<AuctionHouseSnapshot> snapshots) {
+        auctionHouseSnapshotRepository.save(snapshots);
     }
 
 }

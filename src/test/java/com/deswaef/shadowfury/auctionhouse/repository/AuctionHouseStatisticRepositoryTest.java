@@ -1,12 +1,12 @@
 package com.deswaef.shadowfury.auctionhouse.repository;
 
-import com.deswaef.shadowfury.infrastructure.repository.RepositoryIntegrationTest;
+import com.deswaef.shadowfury.infrastructure.repository.ShadowfuryIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
-public class AuctionHouseStatisticRepositoryTest extends RepositoryIntegrationTest {
+public class AuctionHouseStatisticRepositoryTest extends ShadowfuryIntegrationTest {
 
     @Autowired
     private AuctionHouseStatisticRepository repository;
